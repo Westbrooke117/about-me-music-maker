@@ -11,7 +11,7 @@ function App() {
     const topics = [
         'Favourite Album',
         'Best Narrative',
-        'Favourite Cover',
+        'Favourite Cover Art',
         "I'll Listen Someday",
         'Personal Impact',
         'Bad Day Cure',
