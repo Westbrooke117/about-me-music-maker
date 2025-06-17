@@ -7,6 +7,8 @@ import {debounce} from "throttle-debounce";
 const AlbumCell = ({title}) => {
     const [albumURL, setAlbumURL] = useState("");
     const [albumSearchResults, setAlbumSearchResults] = useState([]);
+
+    //Used for popover
     const [open, setOpen] = useState(false);
 
     const returnAlbumSearch = useMemo(
