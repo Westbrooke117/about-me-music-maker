@@ -7,6 +7,7 @@ import {debounce} from "throttle-debounce";
 const AlbumCell = ({title}) => {
     const [albumURL, setAlbumURL] = useState("");
     const [albumSearchResults, setAlbumSearchResults] = useState([]);
+    const [open, setOpen] = useState(false);
 
     const returnAlbumSearch = useMemo(
         () =>
@@ -19,12 +20,12 @@ const AlbumCell = ({title}) => {
 
     return (
         <VStack>
-            <Popover.Root>
+            <Popover.Root open={open} onOpenChange={(e) => setOpen(e.open)}>
                 <Popover.Trigger>
                     <VStack gap={1}>
                         {
                             albumURL !== "" ?
-                                <Image className={'album-img'} src={albumURL} alt="" />
+                                <Image className={'album-img'} width={150} height={150} src={albumURL} alt="" />
                                 :
                                 <Box className={'placeholder-img'} width={150} height={150} backgroundColor={'#222222'}/>
                         }
@@ -39,11 +40,17 @@ const AlbumCell = ({title}) => {
                                 <Popover.Title fontWeight="medium" mb={1}>{title}</Popover.Title>
                                 <HStack alignItems={'baseline'} mb={2} gap={1}>
                                     <Input placeholder={'Search album or artist names...'} onChange={(e) => returnAlbumSearch(e.target.value)}/>
-                                    <Button onClick={() => setAlbumURL("")} size={'sm'} h={'38px'} variant={'surface'}>Clear</Button>
+                                    <Button onClick={() => {
+                                        setAlbumURL("")
+                                        setOpen(false);
+                                    }} size={'sm'} h={'38px'} variant={'surface'}>Clear</Button>
                                 </HStack>
                                 {
                                     albumSearchResults.slice(0,5).map((album) => (
-                                        <Box mt={1} className={'popover-card-item'} onClick={() => setAlbumURL(album.image[3]['#text'])}>
+                                        <Box mt={1} className={'popover-card-item'} onClick={() => {
+                                            setAlbumURL(album.image[3]['#text'])
+                                            setOpen(false)
+                                        }}>
                                             <HStack>
                                                 <Image borderRadius={3} w={50} src={album.image[2]['#text']}/>
                                                 <VStack gap={0} alignItems={'left'}>

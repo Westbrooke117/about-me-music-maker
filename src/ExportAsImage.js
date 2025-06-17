@@ -3,10 +3,6 @@ import * as htmlToImage from "html-to-image";
 const ExportAsImage = (ref) => {
     if (ref){
         let options = {
-            // canvasWidth: 1315,
-            // canvasHeight: 1105,
-            // width: 1315,
-            // height: 1105,
             style: {
                 backgroundColor: "black",
             }

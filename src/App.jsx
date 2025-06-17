@@ -1,8 +1,11 @@
 import './App.css'
 import {AlbumCell} from "./components/AlbumCell.jsx";
-import {Button, Container, Flex, Grid, GridItem, Heading} from "@chakra-ui/react";
+import {Box, Button, Container, Flex, Grid, GridItem, Heading} from "@chakra-ui/react";
 import {ExportAsImage} from "./ExportAsImage.js";
 import {useRef} from "react";
+import ReactGA from "react-ga4";
+
+ReactGA.initialize("G-MQPBH2HY6Q");
 
 function App() {
     const topics = [
@@ -31,30 +34,32 @@ function App() {
         'Best EP',
         'Most Depressing'
     ]
-    const mainComponent = useRef(null);
+    const wrapperRef = useRef(null);
 
   return (
     <Container pt={5} maxW={'5xl'}>
         <Flex pb={5} justifyContent={"center"}>
-            <Heading fontSize={'2xl'}>About Me: Music Maker</Heading>
+            <Heading fontSize={'2xl'}>About Me Music Maker</Heading>
         </Flex>
-        <Grid ref={mainComponent} templateColumns={'repeat(6, 1fr)'} gap={3}>
-            {
-                new Array(4).fill(0).map((_, rowIndex) => (
-                    new Array(6).fill(0).map((_, colIndex) => {
-                        const topicIndex = rowIndex * 6 + colIndex;
-                        return (
-                            <GridItem>
-                                <AlbumCell title={topics[topicIndex]}/>
-                            </GridItem>
-                        )
-                    })
-                ))
-            }
-        </Grid>
+        <Box ref={wrapperRef}>
+            <Grid templateColumns={'repeat(6, 1fr)'} gap={3}>
+                {
+                    new Array(4).fill(0).map((_, rowIndex) => (
+                        new Array(6).fill(0).map((_, colIndex) => {
+                            const topicIndex = rowIndex * 6 + colIndex;
+                            return (
+                                <GridItem>
+                                    <AlbumCell title={topics[topicIndex]}/>
+                                </GridItem>
+                            )
+                        })
+                    ))
+                }
+            </Grid>
+        </Box>
         <Flex mt={5} justifyContent={'center'}>
             <Button variant={'surface'} size={'xl'} onClick={() => {
-                ExportAsImage(mainComponent.current)
+                ExportAsImage(wrapperRef.current)
             }}>Save As Image</Button>
         </Flex>
     </Container>
