@@ -43,7 +43,7 @@ function App() {
             </Flex>
             <Flex justifyContent={'center'}>
                 <Box ref={wrapperRef} p={3} bg={"black"}>
-                    <Grid templateColumns={'repeat(6, min-content)'} gap={3} maxW={'6xl'}>
+                    <Grid templateColumns={'repeat(6, 150px)'} gap={3} maxW={'6xl'}>
                         {
                             new Array(4).fill(0).map((_, rowIndex) => (
                                 new Array(6).fill(0).map((_, colIndex) => {
