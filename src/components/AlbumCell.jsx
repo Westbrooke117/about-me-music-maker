@@ -38,9 +38,9 @@ const AlbumCell = ({ title }) => {
                     <Popover.Positioner>
                         <Popover.Content>
                             <Popover.Arrow />
-                            <Popover.Body>
-                                <Popover.Title fontWeight="medium" mb={1}>{title}</Popover.Title>
-                                <HStack alignItems={'baseline'} mb={2} gap={1}>
+                            <Popover.Body p={3}>
+                                <Popover.Title fontWeight="medium" fontSize={16} mb={2}>{title}</Popover.Title>
+                                <HStack alignItems={'baseline'} gap={1}>
                                     <Input placeholder={'Search album or artist names...'} onChange={(e) => returnAlbumSearch(e.target.value)} />
                                     <Button onClick={() => {
                                         setAlbumURL("")
