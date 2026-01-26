@@ -1,5 +1,5 @@
 import { Box, Button, HStack, Image, Input, Popover, Portal, Text, VStack } from "@chakra-ui/react";
-import { useState, useMemo } from "react";
+import {useState, useMemo, useCallback} from "react";
 import axios from "axios";
 import { debounce } from "throttle-debounce";
 
@@ -11,14 +11,17 @@ const AlbumCell = ({ title }) => {
     //Used for popover
     const [open, setOpen] = useState(false);
 
-    const returnAlbumSearch = useMemo(
-        () =>
-            debounce(500, (e) => {
-                axios.get(`https://ws.audioscrobbler.com/2.0/?method=album.search&album=${e}&api_key=82d112e473f59ade0157abe4a47d4eb5&format=json`)
-                    .then(response => setAlbumSearchResults(response.data.results.albummatches.album))
-            }),
+    const returnAlbumSearch = useCallback(
+        debounce(300, (searchTerm) => {
+            if (!searchTerm) return;
+            axios.get(`https://ws.audioscrobbler.com/2.0/?method=album.search&album=${searchTerm}&api_key=82d112e473f59ade0157abe4a47d4eb5&format=json`)
+                .then(response => {
+                    setAlbumSearchResults(response.data.results.albummatches.album);
+                })
+                .catch(err => console.error(err));
+        }),
         []
-    )
+    );
 
     return (
         <VStack>
@@ -41,7 +44,10 @@ const AlbumCell = ({ title }) => {
                             <Popover.Body p={3}>
                                 <Popover.Title fontWeight="medium" fontSize={16} mb={2}>{title}</Popover.Title>
                                 <HStack alignItems={'baseline'} gap={1}>
-                                    <Input placeholder={'Search album or artist names...'} onChange={(e) => returnAlbumSearch(e.target.value)} />
+                                    <Input placeholder={'Search album or artist names...'} onChange={(e) => {
+                                        const value = e.target.value;
+                                        returnAlbumSearch(value);
+                                    }} />
                                     <Button onClick={() => {
                                         setAlbumURL("")
                                         setOpen(false);
