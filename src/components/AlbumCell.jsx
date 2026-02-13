@@ -1,14 +1,13 @@
 import { Box, Button, HStack, Image, Input, Popover, Portal, Text, VStack } from "@chakra-ui/react";
-import {useState, useMemo, useCallback} from "react";
+import {useState, useCallback} from "react";
 import axios from "axios";
 import { debounce } from "throttle-debounce";
-
 
 const AlbumCell = ({ title }) => {
     const [albumURL, setAlbumURL] = useState("");
     const [albumSearchResults, setAlbumSearchResults] = useState([]);
 
-    //Used for popover
+    //Used for album searching popover
     const [open, setOpen] = useState(false);
 
     const returnAlbumSearch = useCallback(
