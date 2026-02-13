@@ -3,11 +3,12 @@ import {useState, useCallback} from "react";
 import axios from "axios";
 import { debounce } from "throttle-debounce";
 
+
 const AlbumCell = ({ title }) => {
     const [albumURL, setAlbumURL] = useState("");
     const [albumSearchResults, setAlbumSearchResults] = useState([]);
 
-    //Used for album searching popover
+    //Used for popover
     const [open, setOpen] = useState(false);
 
     const returnAlbumSearch = useCallback(
@@ -40,10 +41,10 @@ const AlbumCell = ({ title }) => {
                     <Popover.Positioner>
                         <Popover.Content>
                             <Popover.Arrow />
-                            <Popover.Body p={3}>
-                                <Popover.Title fontWeight="medium" fontSize={16} mb={2}>{title}</Popover.Title>
-                                <HStack alignItems={'baseline'} gap={1}>
-                                    <Input placeholder={'Search album or artist names...'} onChange={(e) => {
+                            <Popover.Body p={1} maxH={350} overflow={'scroll'}>
+                                <Popover.Title fontWeight="medium" fontSize={16} pt={2} ml={2}>{title}</Popover.Title>
+                                <HStack alignItems={'baseline'} gap={2} p={2}>
+                                    <Input placeholder={'Search album or artist names...'} variant={'outline'} onChange={(e) => {
                                         const value = e.target.value;
                                         returnAlbumSearch(value);
                                     }} />
@@ -53,16 +54,20 @@ const AlbumCell = ({ title }) => {
                                     }} size={'sm'} h={'38px'} variant={'surface'}>Clear</Button>
                                 </HStack>
                                 {
-                                    albumSearchResults.slice(0, 5).map((album) => (
-                                        <Box mt={1} className={'popover-card-item'} onClick={() => {
+                                    albumSearchResults.map((album) => (
+                                        <Box p={2} borderRadius={'md'} className={'popover-card-item'} onClick={() => {
                                             setAlbumURL(album.image[3]['#text'])
                                             setOpen(false)
                                         }}>
-                                            <HStack>
-                                                <Image borderRadius={3} w={50} src={album.image[2]['#text']} />
-                                                <VStack gap={0} alignItems={'left'}>
-                                                    <Text maxW={215} whiteSpace={'nowrap'} overflow={'hidden'} textOverflow={'ellipsis'}>{album.name}</Text>
-                                                    <Text maxW={215} whiteSpace={'nowrap'} overflow={'hidden'} textOverflow={'ellipsis'} color={'dimgray'}>{album.artist}</Text>
+                                            <HStack gap={3}>
+                                                <Image
+                                                    borderRadius={'sm'}
+                                                    boxSize={"40px"}
+                                                    fallback={<Box boxSize="40px" bg="gray.200" borderRadius="sm" />}
+                                                    src={album.image[2]['#text'] || null} />
+                                                <VStack gap={0} align={'start'} overflow={'hidden'}>
+                                                    <Text maxW={215} fontSize={'sm'} whiteSpace={'nowrap'} overflow={'hidden'} textOverflow={'ellipsis'}>{album.name}</Text>
+                                                    <Text maxW={215} fontSize={'xs'} whiteSpace={'nowrap'} overflow={'hidden'} textOverflow={'ellipsis'} color={'dimgray'}>{album.artist}</Text>
                                                 </VStack>
                                             </HStack>
                                         </Box>

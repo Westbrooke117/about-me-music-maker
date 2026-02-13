@@ -6,8 +6,6 @@ import {Provider} from "./components/ui/provider.jsx";
 
 createRoot(document.getElementById('root')).render(
     <Provider forcedTheme="dark">
-        <StrictMode>
             <App />
-        </StrictMode>
     </Provider>
 )

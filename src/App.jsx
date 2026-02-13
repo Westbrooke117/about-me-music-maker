@@ -49,7 +49,7 @@ function App() {
                                 new Array(6).fill(0).map((_, colIndex) => {
                                     const topicIndex = rowIndex * 6 + colIndex;
                                     return (
-                                        <GridItem>
+                                        <GridItem key={topicIndex}>
                                             <AlbumCell title={topics[topicIndex]} />
                                         </GridItem>
                                     )
