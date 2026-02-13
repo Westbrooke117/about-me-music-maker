@@ -1,8 +1,8 @@
 import './App.css'
 import { AlbumCell } from "./components/AlbumCell.jsx";
-import {Box, Button, Container, Flex, Grid, GridItem, Heading, HStack} from "@chakra-ui/react";
+import {Box, Button, Container, Flex, Grid, GridItem, Heading} from "@chakra-ui/react";
 import { ExportAsImage } from "./ExportAsImage.js";
-import { useRef } from "react";
+import {useRef, useState} from "react";
 import ReactGA from "react-ga4";
 
 ReactGA.initialize("G-MQPBH2HY6Q");
@@ -35,6 +35,7 @@ function App() {
         'Most Depressing'
     ]
     const wrapperRef = useRef(null);
+    const [isSavingImage, setIsSavingImage] = useState(false);
 
     return (
         <Container pt={5} maxW={'7xl'}>
@@ -60,8 +61,14 @@ function App() {
                 </Box>
             </Flex>
             <Flex justifyContent={"center"}>
-                <Button variant={'surface'} size={'xl'} onClick={() => {
-                    ExportAsImage(wrapperRef.current)
+                <Button
+                    variant={'surface'}
+                    size={'xl'}
+                    loading={isSavingImage}
+                    loadingText={'Saving...'}
+                    onClick={() => {
+                        setIsSavingImage(true)
+                        ExportAsImage(wrapperRef.current, setIsSavingImage)
                 }}>Save As Image</Button>
             </Flex>
         </Container>

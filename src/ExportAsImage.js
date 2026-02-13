@@ -1,6 +1,6 @@
 import * as htmlToImage from "html-to-image";
 
-const ExportAsImage = (ref) => {
+const ExportAsImage = (ref, setIsSavingImage) => {
     if (ref){
         let options = {
             style: {
@@ -14,9 +14,11 @@ const ExportAsImage = (ref) => {
                 link.href = dataUrl;
                 link.download = Date.now().toString();
                 link.click();
+                setIsSavingImage(false)
             })
             .catch(function (error) {
                 console.error('Oops, something went wrong!', error);
+                setIsSavingImage(false)
             });
     }
 }
