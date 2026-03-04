@@ -1,9 +1,11 @@
 import './App.css'
 import { AlbumCell } from "./components/AlbumCell.jsx";
-import {Box, Button, Container, Flex, Grid, GridItem, Heading} from "@chakra-ui/react";
+import {Box, Button, Container, Flex, Grid, GridItem, Heading, Icon} from "@chakra-ui/react";
 import { ExportAsImage } from "./ExportAsImage.js";
-import {useRef, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import ReactGA from "react-ga4";
+import {SettingsDrawer} from "./components/SettingsDrawer.jsx";
+import { MdOutlineSaveAlt } from "react-icons/md";
 
 ReactGA.initialize("G-MQPBH2HY6Q");
 
@@ -37,13 +39,22 @@ function App() {
     const wrapperRef = useRef(null);
     const [isSavingImage, setIsSavingImage] = useState(false);
 
+    // Theme state
+    const [backgroundColor, setBackgroundColor] = useState("#09090b")
+    const [textColor, setTextColor] = useState("#fafafa")
+    const [textIsBold, setTextIsBold] = useState(true)
+
+    useEffect(() => {
+        document.body.style.backgroundColor = backgroundColor;
+    }, [backgroundColor]);
+
     return (
         <Container pt={5} maxW={'7xl'}>
             <Flex justifyContent={'center'} pb={3}>
-                <Heading fontSize={'2xl'}>About Me Music Maker</Heading>
+                <Heading fontSize={'2xl'} color={textColor}>About Me Music Maker</Heading>
             </Flex>
             <Flex justifyContent={'center'}>
-                <Box ref={wrapperRef} p={3} bg={"black"}>
+                <Box ref={wrapperRef} p={3} bg={backgroundColor} color={textColor} fontWeight={textIsBold === true ? 'semibold' : 'normal'}>
                     <Grid templateColumns={'repeat(6, 150px)'} gap={3} maxW={'6xl'}>
                         {
                             new Array(4).fill(0).map((_, rowIndex) => (
@@ -51,7 +62,7 @@ function App() {
                                     const topicIndex = rowIndex * 6 + colIndex;
                                     return (
                                         <GridItem key={topicIndex}>
-                                            <AlbumCell title={topics[topicIndex]} />
+                                            <AlbumCell backgroundColor={backgroundColor} title={topics[topicIndex]} />
                                         </GridItem>
                                     )
                                 })
@@ -60,7 +71,17 @@ function App() {
                     </Grid>
                 </Box>
             </Flex>
-            <Flex justifyContent={"center"}>
+            <Flex mt={5} justifyContent={"center"} gap={5}>
+                <SettingsDrawer
+                    backgroundColor={backgroundColor}
+                    setBackgroundColor={setBackgroundColor}
+
+                    textColor={textColor}
+                    setTextColor={setTextColor}
+
+                    textIsBold={textIsBold}
+                    setTextIsBold={setTextIsBold}
+                />
                 <Button
                     variant={'surface'}
                     size={'xl'}
@@ -69,7 +90,9 @@ function App() {
                     onClick={() => {
                         setIsSavingImage(true)
                         ExportAsImage(wrapperRef.current, setIsSavingImage)
-                }}>Save As Image</Button>
+                }}>
+                    <Icon><MdOutlineSaveAlt/></Icon>
+                    Save Image</Button>
             </Flex>
         </Container>
     )

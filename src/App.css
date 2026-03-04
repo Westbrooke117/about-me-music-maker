@@ -1,9 +1,5 @@
-.popover-card-item {
-    cursor: pointer;
-}
-
 .popover-card-item:hover {
-    background-color: #1c1c1c;
+    cursor: pointer;
 }
 
 .placeholder-img:hover {

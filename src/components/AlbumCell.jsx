@@ -2,9 +2,10 @@ import { Box, Button, HStack, Image, Input, Popover, Portal, Text, VStack } from
 import {useState, useCallback} from "react";
 import axios from "axios";
 import { debounce } from "throttle-debounce";
+import {Harmonizer} from "color-harmony";
+const harmonizer = new Harmonizer();
 
-
-const AlbumCell = ({ title }) => {
+const AlbumCell = ({title, backgroundColor}) => {
     const [albumURL, setAlbumURL] = useState("");
     const [albumSearchResults, setAlbumSearchResults] = useState([]);
 
@@ -32,7 +33,7 @@ const AlbumCell = ({ title }) => {
                             albumURL !== "" ?
                                 <Image className={'album-img'} width={150} height={150} src={albumURL} alt="" />
                                 :
-                                <Box className={'placeholder-img'} width={150} height={150} backgroundColor={'#222222'} />
+                                <Box className={'placeholder-img'} width={150} height={150} backgroundColor={harmonizer.tints(backgroundColor, 'complementary')[1]} _hover={{'backgroundColor': harmonizer.tints(backgroundColor, 'complementary')[3]}}/>
                         }
                         <Text h={'2.5em'} display={'flex'} alignItems={'start'} lineHeight={'1.2'} textAlign={'center'}>{title}</Text>
                     </VStack>

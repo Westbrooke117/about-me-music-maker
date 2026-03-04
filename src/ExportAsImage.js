@@ -2,13 +2,7 @@ import * as htmlToImage from "html-to-image";
 
 const ExportAsImage = (ref, setIsSavingImage) => {
     if (ref){
-        let options = {
-            style: {
-                backgroundColor: "black",
-            }
-        }
-
-        htmlToImage.toPng(ref, options)
+        htmlToImage.toPng(ref)
             .then(function (dataUrl) {
                 const link = document.createElement('a');
                 link.href = dataUrl;
