@@ -15,7 +15,7 @@ const AlbumCell = ({title, backgroundColor}) => {
     const returnAlbumSearch = useCallback(
         debounce(300, (searchTerm) => {
             if (!searchTerm) return;
-            axios.get(`https://ws.audioscrobbler.com/2.0/?method=album.search&album=${searchTerm}&api_key=82d112e473f59ade0157abe4a47d4eb5&format=json`)
+            axios.get(`https://ws.audioscrobbler.com/2.0/?method=album.search&album=${encodeURIComponent(searchTerm)}&api_key=82d112e473f59ade0157abe4a47d4eb5&format=json`)
                 .then(response => {
                     setAlbumSearchResults(response.data.results.albummatches.album);
                 })
