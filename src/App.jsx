@@ -40,21 +40,26 @@ function App() {
     const [isSavingImage, setIsSavingImage] = useState(false);
 
     // Theme state
-    const [backgroundColor, setBackgroundColor] = useState("#09090b")
-    const [textColor, setTextColor] = useState("#fafafa")
-    const [textIsBold, setTextIsBold] = useState(true)
+    const [styles, setStyles] = useState({
+        backgroundColor: "#09090b",
+        textColor: "#fafafa",
+        textIsBold: true,
+        imageBorder: false,
+        imageBorderColor: "#fafafa",
+        fontFamily: null
+    })
 
     useEffect(() => {
-        document.body.style.backgroundColor = backgroundColor;
-    }, [backgroundColor]);
+        document.body.style.backgroundColor = styles.backgroundColor;
+    }, [styles.backgroundColor]);
 
     return (
         <Container pt={5} maxW={'7xl'}>
             <Flex justifyContent={'center'} pb={3}>
-                <Heading fontSize={'2xl'} color={textColor}>About Me Music Maker</Heading>
+                <Heading fontSize={'2xl'} color={styles.textColor} fontFamily={styles.fontFamily}>About Me Music Maker</Heading>
             </Flex>
             <Flex justifyContent={'center'}>
-                <Box ref={wrapperRef} p={3} bg={backgroundColor} color={textColor} fontWeight={textIsBold === true ? 'semibold' : 'normal'}>
+                <Box ref={wrapperRef} p={3} bg={styles.backgroundColor} color={styles.textColor} fontWeight={styles.textIsBold === true ? 'semibold' : 'normal'} fontFamily={styles.fontFamily}>
                     <Grid templateColumns={'repeat(6, 150px)'} gap={3} maxW={'6xl'}>
                         {
                             new Array(4).fill(0).map((_, rowIndex) => (
@@ -62,7 +67,7 @@ function App() {
                                     const topicIndex = rowIndex * 6 + colIndex;
                                     return (
                                         <GridItem key={topicIndex}>
-                                            <AlbumCell backgroundColor={backgroundColor} title={topics[topicIndex]} />
+                                            <AlbumCell styles={styles} title={topics[topicIndex]} />
                                         </GridItem>
                                     )
                                 })
@@ -72,16 +77,7 @@ function App() {
                 </Box>
             </Flex>
             <Flex mt={5} justifyContent={"center"} gap={5}>
-                <SettingsDrawer
-                    backgroundColor={backgroundColor}
-                    setBackgroundColor={setBackgroundColor}
-
-                    textColor={textColor}
-                    setTextColor={setTextColor}
-
-                    textIsBold={textIsBold}
-                    setTextIsBold={setTextIsBold}
-                />
+                <SettingsDrawer styles={styles} setStyles={setStyles}/>
                 <Button
                     variant={'surface'}
                     size={'xl'}

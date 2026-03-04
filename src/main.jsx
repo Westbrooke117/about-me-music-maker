@@ -5,7 +5,7 @@ import App from './App.jsx'
 import {Provider} from "./components/ui/provider.jsx";
 
 createRoot(document.getElementById('root')).render(
-    <Provider forcedTheme="dark">
+    <Provider forcedTheme="dark" >
             <App />
     </Provider>
 )

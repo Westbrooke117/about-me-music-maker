@@ -5,7 +5,7 @@ import { debounce } from "throttle-debounce";
 import {Harmonizer} from "color-harmony";
 const harmonizer = new Harmonizer();
 
-const AlbumCell = ({title, backgroundColor}) => {
+const AlbumCell = ({title, styles}) => {
     const [albumURL, setAlbumURL] = useState("");
     const [albumSearchResults, setAlbumSearchResults] = useState([]);
 
@@ -31,9 +31,9 @@ const AlbumCell = ({title, backgroundColor}) => {
                     <VStack gap={1}>
                         {
                             albumURL !== "" ?
-                                <Image className={'album-img'} width={150} height={150} src={albumURL} alt="" />
+                                <Image border={styles.imageBorder === false ? 'none' : `2px solid ${styles.imageBorderColor}`} className={'album-img'} width={150} height={150} src={albumURL} alt="" />
                                 :
-                                <Box className={'placeholder-img'} width={150} height={150} backgroundColor={harmonizer.tints(backgroundColor, 'complementary')[1]} _hover={{'backgroundColor': harmonizer.tints(backgroundColor, 'complementary')[3]}}/>
+                                <Box border={styles.imageBorder === false ? 'none' : `2px solid ${styles.imageBorderColor}`} className={'placeholder-img'} width={150} height={150} backgroundColor={harmonizer.tints(styles.backgroundColor, 'complementary')[1]} _hover={{'backgroundColor': harmonizer.tints(styles.backgroundColor, 'complementary')[3]}}/>
                         }
                         <Text h={'2.5em'} display={'flex'} alignItems={'start'} lineHeight={'1.2'} textAlign={'center'}>{title}</Text>
                     </VStack>
