@@ -40,23 +40,28 @@ const AlbumCell = ({title, styles}) => {
                 </Popover.Trigger>
                 <Portal>
                     <Popover.Positioner>
-                        <Popover.Content>
+                        <Popover.Content maxH={350} display={'flex'} flexDirection={'column'}>
                             <Popover.Arrow />
-                            <Popover.Body p={1} maxH={350} overflow={'scroll'}>
-                                <Popover.Title fontWeight="medium" fontSize={16} pt={2} ml={2}>{title}</Popover.Title>
-                                <HStack alignItems={'baseline'} gap={2} p={2}>
-                                    <Input placeholder={'Search album or artist names...'} variant={'outline'} onChange={(e) => {
-                                        const value = e.target.value;
-                                        returnAlbumSearch(value);
-                                    }} />
-                                    <Button onClick={() => {
-                                        setAlbumURL("")
-                                        setOpen(false);
-                                    }} size={'sm'} h={'38px'} variant={'surface'}>Clear</Button>
+                            <Box p={2} flexShrink={0}>
+                                <HStack alignItems={'center'} justifyContent={'space-between'}>
+                                    <Popover.Title fontWeight={"semibold"} fontSize={16} pl={1}>{title}</Popover.Title>
+                                    {
+                                        albumURL &&
+                                        <Button onClick={() => {
+                                            setAlbumURL("")
+                                        }} size={'2xs'} colorPalette={'red'} variant={'surface'} mr={1}>Clear</Button>
+                                    }
                                 </HStack>
+                                <Input mt={2} placeholder={'Search for album or artist names...'} variant={'outline'} onChange={(e) => {
+                                    const value = e.target.value;
+                                    returnAlbumSearch(value);
+                                }} />
+                            </Box>
+                            {albumSearchResults.length > 0 && (
+                                <Popover.Body p={1} overflow={'scroll'} flex={1}>
                                 {
                                     albumSearchResults.map((album) => (
-                                        <Box p={2} borderRadius={'md'} className={'popover-card-item'} onClick={() => {
+                                        <Box _hover={{backgroundColor: "gray.900"}} p={2} borderRadius={'md'} className={'popover-card-item'} onClick={() => {
                                             setAlbumURL(album.image[3]['#text'])
                                             setOpen(false)
                                         }}>
@@ -75,6 +80,7 @@ const AlbumCell = ({title, styles}) => {
                                     ))
                                 }
                             </Popover.Body>
+                            )}
                         </Popover.Content>
                     </Popover.Positioner>
                 </Portal>
