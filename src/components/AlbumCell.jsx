@@ -26,7 +26,7 @@ const AlbumCell = ({title, styles}) => {
 
     return (
         <VStack maxW={'150px'} w={'100%'} alignItems={'center'}>
-            <Popover.Root open={open} onOpenChange={(e) => setOpen(e.open)}>
+            <Popover.Root lazyMount unmountOnExit open={open} onOpenChange={(e) => setOpen(e.open)}>
                 <Popover.Trigger asChild>
                     <VStack gap={1} maxW={'150px'} w={'100%'} alignItems={'center'} cursor={'pointer'}>
                         {

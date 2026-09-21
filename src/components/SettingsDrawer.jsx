@@ -35,8 +35,8 @@ const SettingsDrawer = ({styles, setStyles}) => {
     })
 
     return (
-        <Drawer.Root>
-            <Drawer.Trigger>
+        <Drawer.Root preventScroll={false}>
+            <Drawer.Trigger asChild>
                 <Button
                     variant={'surface'}
                     size={'xl'}
@@ -55,19 +55,19 @@ const SettingsDrawer = ({styles, setStyles}) => {
                             <Drawer.Title>Customise Chart</Drawer.Title>
                         </Drawer.Header>
                         <Drawer.Body>
-                            <VStack h={'100%'} gap={5} alignItems={'flex-start'}>
+                            <VStack minH={'100%'} gap={5} alignItems={'flex-start'}>
                                 <Field.Root>
                                     <Field.Label>Background Colour</Field.Label>
                                     <HStack w={'100%'}>
                                         <Input w={15} p={0} m={0} type={'color'} value={styles.backgroundColor} onChange={(e) => debouncedUpdateStyles({backgroundColor: e.target.value})}/>
-                                        <Input value={styles.backgroundColor}/>
+                                        <Input value={styles.backgroundColor} onChange={(e) => debouncedUpdateStyles({backgroundColor: e.target.value})}/>
                                     </HStack>
                                 </Field.Root>
                                 <Field.Root>
                                     <Field.Label>Text Colour</Field.Label>
                                     <HStack w={'100%'}>
                                         <Input w={15} p={0} m={0} type={'color'} value={styles.textColor} onChange={(e) => debouncedUpdateStyles({textColor: e.target.value})}/>
-                                        <Input value={styles.textColor}/>
+                                        <Input value={styles.textColor} onChange={(e) => debouncedUpdateStyles({textColor: e.target.value})}/>
                                     </HStack>
                                 </Field.Root>
                                 <Field.Root>
@@ -120,7 +120,7 @@ const SettingsDrawer = ({styles, setStyles}) => {
                                         <Field.Label>Image Border Colour</Field.Label>
                                         <HStack>
                                             <Input w={15} p={0} m={0} type={'color'} value={styles.imageBorderColor} onChange={(e) => debouncedUpdateStyles({imageBorderColor: e.target.value})}/>
-                                            <Input value={styles.imageBorderColor}/>
+                                            <Input value={styles.imageBorderColor} onChange={(e) => debouncedUpdateStyles({imageBorderColor: e.target.value})}/>
                                         </HStack>
                                     </Field.Root>
                                 }
