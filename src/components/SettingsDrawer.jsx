@@ -60,14 +60,14 @@ const SettingsDrawer = ({styles, setStyles}) => {
                                     <Field.Label>Background Colour</Field.Label>
                                     <HStack w={'100%'}>
                                         <Input w={15} p={0} m={0} type={'color'} value={styles.backgroundColor} onChange={(e) => debouncedUpdateStyles({backgroundColor: e.target.value})}/>
-                                        <Input value={styles.backgroundColor} onChange={(e) => debouncedUpdateStyles({backgroundColor: e.target.value})}/>
+                                        <Input fontSize={{ base: "16px", sm: "sm" }} value={styles.backgroundColor} onChange={(e) => debouncedUpdateStyles({backgroundColor: e.target.value})}/>
                                     </HStack>
                                 </Field.Root>
                                 <Field.Root>
                                     <Field.Label>Text Colour</Field.Label>
                                     <HStack w={'100%'}>
                                         <Input w={15} p={0} m={0} type={'color'} value={styles.textColor} onChange={(e) => debouncedUpdateStyles({textColor: e.target.value})}/>
-                                        <Input value={styles.textColor} onChange={(e) => debouncedUpdateStyles({textColor: e.target.value})}/>
+                                        <Input fontSize={{ base: "16px", sm: "sm" }} value={styles.textColor} onChange={(e) => debouncedUpdateStyles({textColor: e.target.value})}/>
                                     </HStack>
                                 </Field.Root>
                                 <Field.Root>
@@ -120,7 +120,7 @@ const SettingsDrawer = ({styles, setStyles}) => {
                                         <Field.Label>Image Border Colour</Field.Label>
                                         <HStack>
                                             <Input w={15} p={0} m={0} type={'color'} value={styles.imageBorderColor} onChange={(e) => debouncedUpdateStyles({imageBorderColor: e.target.value})}/>
-                                            <Input value={styles.imageBorderColor} onChange={(e) => debouncedUpdateStyles({imageBorderColor: e.target.value})}/>
+                                            <Input fontSize={{ base: "16px", sm: "sm" }} value={styles.imageBorderColor} onChange={(e) => debouncedUpdateStyles({imageBorderColor: e.target.value})}/>
                                         </HStack>
                                     </Field.Root>
                                 }

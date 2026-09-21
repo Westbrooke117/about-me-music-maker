@@ -52,7 +52,7 @@ const AlbumCell = ({title, styles}) => {
                                         }} size={'2xs'} colorPalette={'red'} variant={'surface'} mr={1}>Clear</Button>
                                     }
                                 </HStack>
-                                <Input mt={2} placeholder={'Search for album or artist names...'} variant={'outline'} onChange={(e) => {
+                                <Input fontSize={{ base: "16px", sm: "sm" }} mt={2} placeholder={'Search for album or artist names...'} variant={'outline'} onChange={(e) => {
                                     const value = e.target.value;
                                     returnAlbumSearch(value);
                                 }} />
