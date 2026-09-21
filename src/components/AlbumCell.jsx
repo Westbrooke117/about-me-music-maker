@@ -25,22 +25,22 @@ const AlbumCell = ({title, styles}) => {
     );
 
     return (
-        <VStack>
+        <VStack maxW={'150px'} w={'100%'} alignItems={'center'}>
             <Popover.Root open={open} onOpenChange={(e) => setOpen(e.open)}>
-                <Popover.Trigger>
-                    <VStack gap={1}>
+                <Popover.Trigger asChild>
+                    <VStack gap={1} maxW={'150px'} w={'100%'} alignItems={'center'} cursor={'pointer'}>
                         {
                             albumURL !== "" ?
-                                <Image border={styles.imageBorder === false ? 'none' : `2px solid ${styles.imageBorderColor}`} className={'album-img'} width={150} height={150} src={albumURL} alt="" />
+                                <Image border={styles.imageBorder === false ? 'none' : `2px solid ${styles.imageBorderColor}`} className={'album-img'} width={150} height={150} maxW={'100%'} aspectRatio={'1/1'} src={albumURL} alt="" />
                                 :
-                                <Box border={styles.imageBorder === false ? 'none' : `2px solid ${styles.imageBorderColor}`} className={'placeholder-img'} width={150} height={150} backgroundColor={harmonizer.tints(styles.backgroundColor, 'complementary')[1]} _hover={{'backgroundColor': harmonizer.tints(styles.backgroundColor, 'complementary')[3]}}/>
+                                <Box border={styles.imageBorder === false ? 'none' : `2px solid ${styles.imageBorderColor}`} className={'placeholder-img'} width={150} height={150} maxW={'100%'} aspectRatio={'1/1'} backgroundColor={harmonizer.tints(styles.backgroundColor, 'complementary')[1]} _hover={{'backgroundColor': harmonizer.tints(styles.backgroundColor, 'complementary')[3]}}/>
                         }
-                        <Text h={'2.5em'} display={'flex'} alignItems={'start'} lineHeight={'1.2'} textAlign={'center'}>{title}</Text>
+                        <Text className={'album-title'} h={'2.5em'} maxW={'150px'} w={'100%'} lineHeight={'1.2'} textAlign={'center'}>{title}</Text>
                     </VStack>
                 </Popover.Trigger>
                 <Portal>
                     <Popover.Positioner>
-                        <Popover.Content maxH={350} display={'flex'} flexDirection={'column'}>
+                        <Popover.Content maxH={350} maxW={'min(320px, 90vw)'} display={'flex'} flexDirection={'column'}>
                             <Popover.Arrow />
                             <Box p={2} flexShrink={0}>
                                 <HStack alignItems={'center'} justifyContent={'space-between'}>

@@ -52,7 +52,7 @@ const SettingsDrawer = ({styles, setStyles}) => {
                 <Drawer.Positioner>
                     <Drawer.Content>
                         <Drawer.Header>
-                            <Drawer.Title>Customise Theme</Drawer.Title>
+                            <Drawer.Title>Customise Chart</Drawer.Title>
                         </Drawer.Header>
                         <Drawer.Body>
                             <VStack h={'100%'} gap={5} alignItems={'flex-start'}>

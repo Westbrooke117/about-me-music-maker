@@ -10,3 +10,49 @@
 .album-img:hover {
     cursor: pointer;
 }
+
+.export-mode-6x4 {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 984px !important;
+    min-width: 984px !important;
+    max-width: 984px !important;
+    padding: 12px !important;
+    box-sizing: border-box !important;
+    z-index: -9999 !important;
+    pointer-events: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.export-mode-6x4 .music-grid {
+    display: grid !important;
+    grid-template-columns: repeat(6, 150px) !important;
+    gap: 12px !important;
+    width: 960px !important;
+    min-width: 960px !important;
+    max-width: 960px !important;
+}
+
+.export-mode-6x4 .album-img,
+.export-mode-6x4 .placeholder-img {
+    width: 150px !important;
+    height: 150px !important;
+    min-width: 150px !important;
+    min-height: 150px !important;
+}
+
+.album-title {
+    text-align: center !important;
+    width: 100% !important;
+    max-width: 150px !important;
+    display: block !important;
+}
+
+.export-mode-6x4 .album-title {
+    width: 150px !important;
+    max-width: 150px !important;
+    text-align: center !important;
+    display: block !important;
+}
