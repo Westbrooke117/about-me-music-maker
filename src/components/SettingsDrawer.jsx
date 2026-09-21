@@ -79,7 +79,7 @@ const SettingsDrawer = ({styles, setStyles}) => {
                                         <Select.HiddenSelect/>
                                         <Select.Control>
                                             <Select.Trigger>
-                                                <Select.ValueText/>
+                                                <Select.ValueText fontFamily={styles.fontFamily ?? "sans-serif"} style={{ fontFamily: styles.fontFamily ?? "sans-serif" }}/>
                                             </Select.Trigger>
                                             <Select.IndicatorGroup>
                                                 <Select.Indicator/>
@@ -88,8 +88,15 @@ const SettingsDrawer = ({styles, setStyles}) => {
                                         <Select.Positioner>
                                             <Select.Content>
                                                 {fonts.items.map((font) => (
-                                                    <Select.Item item={font} key={font.value}>
-                                                        {font.label}
+                                                    <Select.Item
+                                                        item={font}
+                                                        key={font.value}
+                                                        fontFamily={font.value}
+                                                        style={{ fontFamily: font.value }}
+                                                    >
+                                                        <Select.ItemText fontFamily={font.value} style={{ fontFamily: font.value }}>
+                                                            {font.label}
+                                                        </Select.ItemText>
                                                         <Select.ItemIndicator />
                                                     </Select.Item>
                                                 ))}
